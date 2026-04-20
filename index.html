@@ -495,19 +495,23 @@ bgm.addEventListener('seeked', () => {
   if (bgm.currentTime < 0.1) bgm.volume = 0;
 });
 
-// 스크롤 시작 시 재생 (브라우저 자동재생 정책 우회)
+// 첫 상호작용 시 재생 (브라우저 자동재생 정책 우회)
 let bgmTriggered = false;
+const triggerEvents = ['scroll','touchstart','touchmove','touchend','click','pointerdown','keydown','wheel'];
 function triggerBgm() {
   if (bgmTriggered) return;
   bgmTriggered = true;
   playBgm();
-  window.removeEventListener('scroll', triggerBgm);
-  window.removeEventListener('touchmove', triggerBgm);
-  window.removeEventListener('wheel', triggerBgm);
+  triggerEvents.forEach(evt => window.removeEventListener(evt, triggerBgm));
 }
-window.addEventListener('scroll', triggerBgm, { passive: true });
-window.addEventListener('touchmove', triggerBgm, { passive: true });
-window.addEventListener('wheel', triggerBgm, { passive: true });
+triggerEvents.forEach(evt => window.addEventListener(evt, triggerBgm, { passive: true }));
+
+// 로딩 실패 시 버튼에 표시
+bgm.addEventListener('error', () => {
+  console.error('음원 파일을 불러올 수 없습니다:', bgm.currentSrc);
+  bgmBtn.style.opacity = '0.3';
+  bgmBtn.title = '음원 파일을 찾을 수 없습니다 (music.mp3)';
+});
 
 bgmBtn.addEventListener('click', (e) => {
   e.stopPropagation();
