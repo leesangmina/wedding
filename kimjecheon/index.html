@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金 濟 千 — Kim Je Cheon | Architectural Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #fafaf8;
+    --ink: #111111;
+    --muted: #8a8a88;
+    --line: #e5e3dd;
+    --accent: #1a1a1a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', 'Noto Serif KR', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .serif { font-family: 'Cormorant Garamond', 'Noto Serif KR', serif; }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+    color: #fff;
+  }
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    font-weight: 400;
+  }
+  nav ul {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  nav ul a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  nav ul a:hover { opacity: 0.5; }
+
+  /* Hero */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0 48px;
+  }
+  .hero .chars {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 500;
+    font-size: clamp(56px, 10vw, 140px);
+    letter-spacing: 0.6em;
+    padding-left: 0.6em;
+    color: var(--ink);
+    animation: fadeUp 1.6s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .hero .sub {
+    position: absolute;
+    bottom: 60px;
+    right: 48px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.6;
+    animation: fadeUp 1.6s 0.4s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .hero .sub strong {
+    display: block;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .hero .scroll-cue {
+    position: absolute;
+    bottom: 60px;
+    left: 48px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    animation: fadeUp 1.6s 0.6s cubic-bezier(.2,.7,.2,1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Section base */
+  section {
+    padding: 160px 48px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--ink);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 120px;
+    align-items: start;
+  }
+  .about-quote {
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .about-quote::before {
+    content: '—';
+    display: block;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: var(--muted);
+    font-style: normal;
+  }
+  .about-text p {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 15px;
+    max-width: 560px;
+  }
+  .about-text p.lead {
+    font-size: 18px;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* Projects */
+  .projects-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 100px;
+    align-items: end;
+  }
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .project {
+    display: grid;
+    grid-template-columns: 80px 1.1fr 1fr;
+    gap: 48px;
+    padding: 56px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+    transition: padding 0.4s ease;
+  }
+  .project:last-child { border-bottom: 1px solid var(--line); }
+  .project-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding-top: 6px;
+  }
+  .project-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #eeece6;
+    position: relative;
+    order: 2;
+  }
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s cubic-bezier(.2,.7,.2,1), filter 0.6s;
+    filter: saturate(0.95);
+  }
+  .project-image:hover img {
+    transform: scale(1.03);
+    filter: saturate(1.05);
+  }
+  .project-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+    pointer-events: none;
+  }
+  .project-title {
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .project-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+    font-size: 15px;
+    display: block;
+    margin-top: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+  .project-kor {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-family: 'Noto Serif KR', serif;
+  }
+  .project-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #333;
+    padding-top: 10px;
+  }
+  .project-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .project-meta span {
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+  }
+
+  /* Career */
+  .career {
+    background: #0f0f0e;
+    color: #e8e6df;
+    margin: 0;
+    max-width: none;
+    padding: 160px 48px;
+  }
+  .career-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .career .section-label { color: #9a9890; }
+  .career .section-label::before { background: #e8e6df; }
+  .career .section-title { color: #fff; }
+  .career-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 80px;
+  }
+  .career-col h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #9a9890;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+  .job {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    padding: 28px 0;
+    border-top: 1px solid #2a2a28;
+  }
+  .job-date {
+    font-size: 12px;
+    color: #9a9890;
+    letter-spacing: 0.1em;
+  }
+  .job-date span {
+    display: block;
+    font-size: 10px;
+    margin-top: 6px;
+    color: #6a6865;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .job-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .job-sub {
+    font-size: 12px;
+    color: #9a9890;
+    margin-bottom: 12px;
+    font-family: 'Noto Serif KR', serif;
+  }
+  .job-list {
+    list-style: none;
+  }
+  .job-list li {
+    font-size: 13px;
+    color: #c8c6bf;
+    padding: 3px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .job-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #6a6865;
+  }
+
+  /* Awards */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .award-card {
+    background: var(--bg);
+    padding: 48px 36px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.3s;
+  }
+  .award-card:hover { background: #fff; }
+  .award-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+  .award-title {
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-top: 16px;
+  }
+  .award-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    font-family: 'Noto Serif KR', serif;
+  }
+  .award-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .award-count small {
+    font-size: 14px;
+    font-style: normal;
+    color: var(--muted);
+    margin-left: 8px;
+    letter-spacing: 0.2em;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: start;
+  }
+  .skill-group {
+    margin-bottom: 48px;
+  }
+  .skill-group h5 {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-tags span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    padding: 4px 0;
+    color: var(--ink);
+  }
+  .skill-tags span:not(:last-child)::after {
+    content: ' · ';
+    color: var(--muted);
+    margin-left: 12px;
+  }
+
+  /* Contact */
+  .contact {
+    background: #0f0f0e;
+    color: #e8e6df;
+    padding: 140px 48px 60px;
+    max-width: none;
+    margin: 0;
+  }
+  .contact-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .contact-title {
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 110px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 80px;
+  }
+  .contact-title em {
+    font-style: italic;
+    color: #8a8880;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    border-top: 1px solid #2a2a28;
+    border-bottom: 1px solid #2a2a28;
+  }
+  .contact-block h6 {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #8a8880;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .contact-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .contact-block a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #3a3a38;
+    transition: border-color 0.3s;
+  }
+  .contact-block a:hover { border-color: #fff; }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 60px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6a6865;
+  }
+  footer .ideo {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    color: #8a8880;
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav ul { display: none; }
+    section { padding: 100px 24px; }
+    .career { padding: 100px 24px; }
+    .contact { padding: 100px 24px 40px; }
+    .about-grid, .projects-intro, .career-grid, .skills-grid, .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .awards-grid { grid-template-columns: 1fr; }
+    .project {
+      grid-template-columns: 40px 1fr;
+      gap: 20px;
+    }
+    .project-image { grid-column: 1 / -1; margin-top: 20px; }
+    .hero .sub, .hero .scroll-cue { display: none; }
+    .job { grid-template-columns: 1fr; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">金 濟 千</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="chars">金 濟 千</div>
+  <div class="scroll-cue">Scroll ↓</div>
+  <div class="sub">
+    <strong>Architectural Portfolio</strong>
+    Design in 2018 — 2024
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">01 &nbsp; About</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title">Architect of<br><em>quiet intervals.</em></h2>
+    </div>
+    <div class="about-text">
+      <p class="lead">
+        김제천 (Kim Je Cheon) is an architect exploring the space between people, program, and place — designing buffers where informal knowledge, coexistence, and everyday encounters can take form.
+      </p>
+      <p>
+        경계의 틈에서 공존의 가능성을 탐구합니다. 오피스, 호스피스, 공동주거, 학교, 전시공간에 이르기까지, 사용자의 개성과 도시의 결을 함께 담아내는 건축을 지향합니다.
+      </p>
+      <p>
+        Currently at <strong>GANSAM Architects &amp; Associates</strong>, Seoul. Previously with Haenglim and Kidan Architecture. 11× student competition awards (2023–2024), and a national STEM excellence scholar.
+      </p>
+      <div class="about-quote" style="margin-top: 48px;">
+        My story hasn't<br>even begun.
+        <div style="font-family:'Noto Serif KR', serif; font-size: 14px; font-style: normal; color: var(--muted); margin-top: 12px;">나는 아직 시작조차 하지 않았습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-label">02 &nbsp; Selected Work</div>
+  <div class="projects-intro">
+    <h2 class="section-title">Six projects,<br>one <em>thread.</em></h2>
+    <p style="font-size: 15px; color: #333; max-width: 480px; padding-bottom: 12px;">
+      From a digital-nomad office in Daegu to a concrete-mesh apartment in Seoul and a fashion office in Italy — each project asks how <em>buffer space</em> can invite coexistence.
+    </p>
+  </div>
+
+  <div class="projects-list">
+
+    <article class="project">
+      <div class="project-num">/ 01</div>
+      <div>
+        <h3 class="project-title">Nomads Valley <em>Digital nomad office</em></h3>
+        <p class="project-kor">온-오프를 넘나드는 생활의 현대인들을 위한 유희하는 오피스 리모델링</p>
+        <p class="project-desc">
+          Three building masses reorganized around a central outdoor garden. The project introduces <em>Agile Workplace</em> — an office choreographed for accidental encounter, where 45° buffer spaces fold informal knowledge-sharing into the workflow of a Multi-Persona generation.
+        </p>
+        <div class="project-meta">
+          <span>Daegu</span><span>2023</span><span>Renovation</span>
+        </div>
+      </div>
+      <div class="project-image">
+        <img src="kimjecheon_assets/p01_nomads.jpg" alt="Nomads Valley render" loading="lazy">
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-num">/ 02</div>
+      <div>
+        <h3 class="project-title">Urban Sponge <em>Village hospice</em></h3>
+        <p class="project-kor">환자의 개성을 담은 호스피스 주거가 모여 형성하는 마을</p>
+        <p class="project-desc">
+          A hospice reimagined as a village. Corridors become <em>gol-mok-gil</em> — alleyways between small homes — and each patient unit gains its own buffer to the shared <em>madang</em>. A quiet architecture for dignity, for solitary elders and children alike.
+        </p>
+        <div class="project-meta">
+          <span>Coastal Site</span><span>2023</span><span>Healthcare</span>
+        </div>
+      </div>
+      <div class="project-image">
+        <img src="kimjecheon_assets/p02_urban_sponge.jpg" alt="Urban Sponge aerial view" loading="lazy">
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-num">/ 03</div>
+      <div>
+        <h3 class="project-title">Concrete Veins <em>House for all</em></h3>
+        <p class="project-kor">모두의 집 : 내일의 지구를 위한 오늘의 건축</p>
+        <p class="project-desc">
+          Renovation of an aged concrete apartment into a cross-species habitat. Bacterial concrete self-heals its cracks; a steel mesh carries niches for owls, sparrows, reptiles, butterflies. The city's veins of concrete become living capillaries of green — <strong>KAFF 2024 exhibited</strong>.
+        </p>
+        <div class="project-meta">
+          <span>Seoul · Namsan</span><span>2024</span><span>Team · Leader</span>
+        </div>
+      </div>
+      <div class="project-image" style="aspect-ratio: 10 / 11;">
+        <img src="kimjecheon_assets/p03_concrete_veins.jpg" alt="Concrete Veins facade" loading="lazy">
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-num">/ 04</div>
+      <div>
+        <h3 class="project-title">Flexible Balcony <em>Social housing</em></h3>
+        <p class="project-kor">산업단지 노동자들의 생애주기에 따라 확장되는 집합주거</p>
+        <p class="project-desc">
+          Six unit types that expand and recombine with a household's lifecycle. Extended balconies carry the residents' colors out to the street façade — indirect communication between migrant workers, students, and the city passing by.
+        </p>
+        <div class="project-meta">
+          <span>Daegu · Dalgubeol-daero</span><span>2024</span><span>Housing</span>
+        </div>
+      </div>
+      <div class="project-image">
+        <img src="kimjecheon_assets/p04_flexible_balcony.jpg" alt="Flexible Balcony courtyard" loading="lazy">
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-num">/ 05</div>
+      <div>
+        <h3 class="project-title">Rhizome School <em>Campus elementary school</em></h3>
+        <p class="project-kor">점심시간과 쉬는시간에 우연히 마주치며 지식을 공유하는 초등학교</p>
+        <p class="project-desc">
+          Six grade-based learning hubs scattered like a village along the urban and nature axes. A compact-city campus that lets lunch breaks and recess do what curriculum cannot — grow a student's horizontal network of knowledge.
+        </p>
+        <div class="project-meta">
+          <span>Daechang</span><span>2024</span><span>Education</span>
+        </div>
+      </div>
+      <div class="project-image">
+        <img src="kimjecheon_assets/p05_rhizome_school.jpg" alt="Rhizome School campus" loading="lazy">
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-num">/ 06</div>
+      <div>
+        <h3 class="project-title">One Carpet <em>Fashion office renovation</em></h3>
+        <p class="project-kor">이탈리아의 패션코드 '아쥬르 에 마로네'를 담은 건축</p>
+        <p class="project-desc">
+          A single azure fabric drapes through the old brown-brick mill — <em>Azzurro e marrone</em>, the colors of sky and earth — unifying exhibition, workshop and meeting into one continuous catwalk. One gesture, six programs.
+        </p>
+        <div class="project-meta">
+          <span>Biella, Italy</span><span>2024</span><span>Team · Leader</span>
+        </div>
+      </div>
+      <div class="project-image">
+        <img src="kimjecheon_assets/p06_one_carpet.jpg" alt="One Carpet interior" loading="lazy">
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="career" id="career">
+  <div class="career-inner">
+    <div class="section-label">03 &nbsp; Career</div>
+    <h2 class="section-title">Practice<br><em>— in motion.</em></h2>
+
+    <div class="career-grid">
+      <div class="career-col">
+        <h4>Professional</h4>
+
+        <div class="job">
+          <div class="job-date">2025.01 — <span>Seoul</span></div>
+          <div>
+            <div class="job-title">GANSAM Architects &amp; Associates</div>
+            <div class="job-sub">(주)간삼건축 설계 1그룹</div>
+            <ul class="job-list">
+              <li>Samsung Electronics HQ (R7) Design</li>
+              <li>Woori Bank Namyangju Office &amp; Data Center</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-date">2024.08 &nbsp;· &nbsp;2023.07–08 <span>Seoul</span></div>
+          <div>
+            <div class="job-title">HAENGLIM Architecture &amp; Engineering</div>
+            <div class="job-sub">(주)행림종합건축사사무소</div>
+            <ul class="job-list">
+              <li>Lee Kun-Hee Museum · International Design Competition</li>
+              <li>Yonsei International Campus · Quantum Computing Cluster</li>
+              <li>Haenglim HQ · Cement tile fabrication</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-date">2024.11 — 2025.01 <span>Daegu</span></div>
+          <div>
+            <div class="job-title">KIDAN Architecture</div>
+            <div class="job-sub">(주)기단건축사사무소 홈페이지 리뉴얼</div>
+            <ul class="job-list">
+              <li>Website renewal · promotion strategy</li>
+              <li>Main diagrams for 70+ projects</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="career-col">
+        <h4>Scholarship &amp; Recognition</h4>
+
+        <div class="job">
+          <div class="job-date">2023 — 2024 <span>Korea</span></div>
+          <div>
+            <div class="job-title">Korea's National Excellence Scholarship (STEM)</div>
+            <div class="job-sub">대한민국 국가우수장학금 · 이공계</div>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-date">2022 — 2024 <span>Daegu</span></div>
+          <div>
+            <div class="job-title">Academic Excellence Scholarship × 16</div>
+            <div class="job-sub">Consecutive semesters</div>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-date">2020 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>National Merit</span></div>
+          <div>
+            <div class="job-title">Korea National Merit Award</div>
+            <div class="job-sub">중요범인 검거 및 자살 의심자 구조 유공 · 경찰청장 / 대구지방경찰청장 표창</div>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-date">2020 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Education</span></div>
+          <div>
+            <div class="job-title">25th Education Federation Award</div>
+            <div class="job-sub">우수상 · 대구·경북 통합 1위</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="section-label">04 &nbsp; Exhibitions &amp; Awards</div>
+  <h2 class="section-title">Eleven awards,<br>one <em>studio year.</em></h2>
+
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-year">2024</div>
+      <div>
+        <div class="award-title">KAFF<br>Korea Architecture &amp; Design Expo</div>
+        <div class="award-sub">《Concrete veins, Nomads valley, Night school, Flexible hanok》 작품 전시</div>
+      </div>
+    </div>
+
+    <div class="award-card">
+      <div class="award-year">2023</div>
+      <div>
+        <div class="award-title">Daegu International<br>Architecture Fair</div>
+        <div class="award-sub">동성로 · 경기 · 울산건축대전 전시</div>
+      </div>
+    </div>
+
+    <div class="award-card">
+      <div class="award-year">2023 — 2024</div>
+      <div>
+        <div class="award-count">11<small>AWARDS</small></div>
+        <div class="award-sub" style="margin-top: 12px;">정림학생건축상 · NON.A · YAC etc. · 학생 공모전 수상</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">05 &nbsp; Tools</div>
+  <div class="skills-grid">
+    <h2 class="section-title">Instruments<br>of the <em>hand.</em></h2>
+
+    <div>
+      <div class="skill-group">
+        <h5>CAD &amp; Modeling</h5>
+        <div class="skill-tags">
+          <span>Autocad</span><span>ZWcad</span><span>Rhino</span><span>Grasshopper</span><span>Sketchup</span><span>Revit</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h5>Rendering</h5>
+        <div class="skill-tags">
+          <span>V-ray</span><span>Lumion</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h5>Graphic &amp; Editorial</h5>
+        <div class="skill-tags">
+          <span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>Lightroom</span><span>Microsoft Office</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="color:#9a9890;">06 &nbsp; Contact</div>
+    <h1 class="contact-title">
+      No jealousy,<br><em>only pure passion.</em>
+    </h1>
+
+    <div class="contact-grid">
+      <div class="contact-block">
+        <h6>Studio</h6>
+        <p>GANSAM Architects<br>&amp; Associates<br>Seoul, Korea</p>
+      </div>
+      <div class="contact-block">
+        <h6>Email</h6>
+        <p><a href="mailto:kimjecheon@portfolio.kr">kimjecheon<br>@portfolio.kr</a></p>
+      </div>
+      <div class="contact-block">
+        <h6>Portfolio</h6>
+        <p><a href="#">Full PDF →</a><br><a href="#">Instagram →</a></p>
+      </div>
+    </div>
+
+    <footer>
+      <div>© 2024 Kim Je Cheon · 金 濟 千</div>
+      <div class="ideo">Design in 2018 — 2024</div>
+      <div>Architectural Portfolio</div>
+    </footer>
+  </div>
+</section>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('section > *, .project, .award-card, .job').forEach(el => {
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+
+  // Subtle parallax on hero characters
+  const chars = document.querySelector('.hero .chars');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      chars.style.transform = `translateY(${y * 0.3}px)`;
+      chars.style.opacity = 1 - (y / window.innerHeight) * 1.2;
+    }
+  });
+</script>
+
+</body>
+</html>
