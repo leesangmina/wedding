@@ -213,13 +213,37 @@ body {
   line-height: 1.8;
 }
 .map {
-  margin-bottom: 30px;
+  margin-bottom: 16px;
   border: 1px solid var(--line);
   aspect-ratio: 4 / 3;
   background: #eee;
   overflow: hidden;
 }
 .map img { width: 100%; height: 100%; object-fit: cover; }
+.map-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 30px;
+}
+.map-links a {
+  display: block;
+  padding: 12px 6px;
+  text-align: center;
+  font-size: 13px;
+  font-family: var(--serif-kr);
+  color: var(--text);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, border-color 0.2s;
+}
+.map-links a:hover {
+  background: var(--bg);
+  border-color: var(--accent);
+}
 .transport {
   text-align: left;
   border-top: 1px solid var(--line);
@@ -400,8 +424,11 @@ body {
         <p class="venue-addr">서울시 중구 장충단로 72</p>
         <p class="venue-detail">크레스트72</p>
       </div>
-      <div class="map">
-        <img src="images/map.jpg" alt="지도" />
+      <div class="map" id="kakaoMap"></div>
+      <div class="map-links">
+        <a href="https://map.kakao.com/link/to/크레스트72,37.5599,127.0070" target="_blank" rel="noopener">카카오맵</a>
+        <a href="https://map.naver.com/p/search/크레스트72" target="_blank" rel="noopener">네이버지도</a>
+        <a href="https://tmap.life/route?goalname=크레스트72&goalx=127.0070&goaly=37.5599" target="_blank" rel="noopener">티맵 길찾기</a>
       </div>
       <div class="transport">
         <div class="transport-item">
@@ -450,6 +477,52 @@ body {
     </footer>
 
   </div>
+
+<!-- 카카오맵 SDK: 아래 YOUR_KAKAO_JS_KEY를 발급받은 JavaScript 키로 교체하세요.
+     발급: https://developers.kakao.com → 내 애플리케이션 → 앱 생성 → JavaScript 키 복사
+     그다음 [플랫폼 → Web] 에 배포 도메인 등록 (예: https://leesangmina.github.io) -->
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=193b615d7b0e9d0d2192dc2ee421bb23&libraries=services&autoload=false"></script>
+<script>
+(function initKakaoMap() {
+  const container = document.getElementById('kakaoMap');
+  if (!container) return;
+
+  // SDK 로드 실패(키 미설정 등) 시 안내 표시
+  if (typeof kakao === 'undefined' || !kakao.maps) {
+    container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8a847d;font-size:13px;text-align:center;padding:20px;">카카오맵 앱키를 등록하면 지도가 표시됩니다<br/>(아래 버튼으로 길찾기 가능)</div>';
+    return;
+  }
+
+  kakao.maps.load(function () {
+    const center = new kakao.maps.LatLng(37.5599, 127.0070);
+    const map = new kakao.maps.Map(container, { center, level: 3 });
+
+    // 주소로 정확한 좌표 재조회
+    if (kakao.maps.services) {
+      const geocoder = new kakao.maps.services.Geocoder();
+      geocoder.addressSearch('서울시 중구 장충단로 72', function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          map.setCenter(coords);
+          addMarker(coords);
+        } else {
+          addMarker(center);
+        }
+      });
+    } else {
+      addMarker(center);
+    }
+
+    function addMarker(coords) {
+      const marker = new kakao.maps.Marker({ position: coords, map });
+      const iw = new kakao.maps.InfoWindow({
+        content: '<div style="padding:8px 12px;font-size:13px;font-family:sans-serif;white-space:nowrap;">크레스트72 글라스홀</div>'
+      });
+      iw.open(map, marker);
+    }
+  });
+})();
+</script>
 
 <script>
 const bgm = document.getElementById('bgm');
