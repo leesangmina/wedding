@@ -227,22 +227,50 @@ body {
   margin-bottom: 30px;
 }
 .map-links a {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   padding: 12px 6px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   font-family: var(--serif-kr);
   color: var(--text);
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
   letter-spacing: 0.02em;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
 .map-links a:hover {
   background: var(--bg);
   border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.map-link-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: -0.02em;
+}
+.logo-kakao {
+  background: #FEE500;
+  color: #191919;
+}
+.logo-naver {
+  background: #03C75A;
+  color: #fff;
+}
+.logo-tmap {
+  background: #EA002C;
+  color: #fff;
 }
 .transport {
   text-align: left;
@@ -426,9 +454,20 @@ body {
       </div>
       <div class="map" id="kakaoMap"></div>
       <div class="map-links">
-        <a href="https://map.kakao.com/link/to/크레스트72,37.5599,127.0070" target="_blank" rel="noopener">카카오맵</a>
-        <a href="https://map.naver.com/p/search/크레스트72" target="_blank" rel="noopener">네이버지도</a>
-        <a href="https://tmap.life/route?goalname=크레스트72&goalx=127.0070&goaly=37.5599" target="_blank" rel="noopener">티맵 길찾기</a>
+        <a href="https://map.kakao.com/link/to/크레스트72,37.5599,127.0070" target="_blank" rel="noopener">
+          <span class="map-link-logo logo-kakao" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="#191919"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.86 1.86 5.36 4.65 6.79-.21.77-.75 2.71-.86 3.13-.03.13.05.13.11.09.05-.03 3.37-2.29 3.83-2.6.75.11 1.51.17 2.27.17 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
+          </span>
+          카카오맵
+        </a>
+        <a href="https://map.naver.com/p/search/크레스트72" target="_blank" rel="noopener">
+          <span class="map-link-logo logo-naver" aria-hidden="true">N</span>
+          네이버지도
+        </a>
+        <a href="https://tmap.life/route?goalname=크레스트72&goalx=127.0070&goaly=37.5599" target="_blank" rel="noopener">
+          <span class="map-link-logo logo-tmap" aria-hidden="true">T</span>
+          티맵 길찾기
+        </a>
       </div>
       <div class="transport">
         <div class="transport-item">
@@ -495,7 +534,7 @@ body {
 
   kakao.maps.load(function () {
     const center = new kakao.maps.LatLng(37.5599, 127.0070);
-    const map = new kakao.maps.Map(container, { center, level: 3 });
+    const map = new kakao.maps.Map(container, { center, level: 4 });
 
     // 주소로 정확한 좌표 재조회
     if (kakao.maps.services) {
