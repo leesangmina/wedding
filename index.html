@@ -184,45 +184,19 @@ body {
 }
 
 .countdown {
-  margin-top: 32px;
-  padding: 22px 8px 14px;
+  margin-top: 24px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
   text-align: center;
-}
-.cd-label {
   font-family: var(--serif-en);
-  font-size: 12px;
-  letter-spacing: 0.35em;
-  color: var(--accent);
-  margin-bottom: 18px;
-  text-transform: uppercase;
-}
-.cd-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-.cd-cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-.cd-num {
-  font-family: var(--serif-en);
-  font-size: 26px;
   font-weight: 300;
   color: var(--text);
-  min-width: 2.2ch;
-  line-height: 1;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  font-size: 22px;
 }
-.cd-unit {
-  font-family: var(--serif-en);
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  color: var(--sub);
-}
+.cd-dday { color: var(--accent); margin-right: 14px; }
+.cd-time { color: var(--sub); }
 .cal-head {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -514,13 +488,8 @@ body {
       </div>
       <div class="calendar" id="calendar"></div>
       <div class="countdown" aria-live="polite">
-        <div class="cd-label">결혼식까지</div>
-        <div class="cd-grid">
-          <div class="cd-cell"><span class="cd-num" id="cdDays">–</span><span class="cd-unit">DAYS</span></div>
-          <div class="cd-cell"><span class="cd-num" id="cdHours">–</span><span class="cd-unit">HOURS</span></div>
-          <div class="cd-cell"><span class="cd-num" id="cdMins">–</span><span class="cd-unit">MIN</span></div>
-          <div class="cd-cell"><span class="cd-num" id="cdSecs">–</span><span class="cd-unit">SEC</span></div>
-        </div>
+        <span class="cd-dday" id="cdDday">D-–</span>
+        <span class="cd-time" id="cdTime">–:–</span>
       </div>
     </section>
 
@@ -743,26 +712,26 @@ document.querySelectorAll('.contact-toggle').forEach(btn => {
 
 (function countdown() {
   const target = new Date('2026-11-28T18:00:00+09:00').getTime();
-  const dEl = document.getElementById('cdDays');
-  const hEl = document.getElementById('cdHours');
-  const mEl = document.getElementById('cdMins');
-  const sEl = document.getElementById('cdSecs');
-  if (!dEl) return;
+  const dd = document.getElementById('cdDday');
+  const tm = document.getElementById('cdTime');
+  if (!dd || !tm) return;
   const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
   function tick() {
     const diff = target - Date.now();
     if (diff <= 0) {
-      dEl.textContent = '0'; hEl.textContent = '00'; mEl.textContent = '00'; sEl.textContent = '00';
+      dd.textContent = 'D-DAY';
+      tm.textContent = '00:00';
       return;
     }
     const s = Math.floor(diff / 1000);
-    dEl.textContent = String(Math.floor(s / 86400));
-    hEl.textContent = pad(Math.floor((s % 86400) / 3600));
-    mEl.textContent = pad(Math.floor((s % 3600) / 60));
-    sEl.textContent = pad(s % 60);
+    const days = Math.floor(s / 86400);
+    const hrs = Math.floor((s % 86400) / 3600);
+    const mins = Math.floor((s % 3600) / 60);
+    dd.textContent = 'D-' + days;
+    tm.textContent = pad(hrs) + ':' + pad(mins);
   }
   tick();
-  setInterval(tick, 1000);
+  setInterval(tick, 30000);
 })();
 
 (function initLightbox() {
