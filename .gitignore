@@ -9,3 +9,4 @@ desktop.ini
 # logs / temp
 *.log
 *.tmp
+.claude/

@@ -191,14 +191,61 @@ body {
 .gallery-item {
   aspect-ratio: 1;
   overflow: hidden;
-  background: #ddd;
+  background: #f2ede4;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
 }
 .gallery-item img {
   width: 100%; height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
+.gallery-item.contain img { object-fit: contain; background: #f2ede4; }
 .gallery-item:hover img { transform: scale(1.05); }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+}
+.lightbox.open { display: flex; }
+.lb-img {
+  max-width: 92vw;
+  max-height: 82vh;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.lb-close, .lb-prev, .lb-next {
+  position: absolute;
+  background: transparent;
+  color: #fff;
+  padding: 8px 16px;
+  line-height: 1;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.lb-close:hover, .lb-prev:hover, .lb-next:hover { opacity: 1; }
+.lb-close { top: 18px; right: 18px; font-size: 32px; }
+.lb-prev, .lb-next { top: 50%; transform: translateY(-50%); font-size: 44px; font-weight: 200; }
+.lb-prev { left: 4px; }
+.lb-next { right: 4px; }
+.lb-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.7);
+  font-family: var(--serif-en);
+  font-size: 13px;
+  letter-spacing: 0.25em;
+}
 
 .venue { margin-bottom: 30px; }
 .venue-name {
@@ -403,6 +450,31 @@ body {
       <div class="calendar" id="calendar"></div>
     </section>
 
+    <section class="section gallery">
+      <div class="section-label">GALLERY</div>
+      <h2 class="section-title">우리의 순간들</h2>
+      <div class="gallery-grid">
+        <button type="button" class="gallery-item"><img src="images/gallery/029.jpg" alt="사진 1" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/004.jpg" alt="사진 2" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/012.jpg" alt="사진 3" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/032.jpg" alt="사진 4" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/042.jpg" alt="사진 5" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/041.jpg" alt="사진 6" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/046.jpg" alt="사진 7" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/054.jpg" alt="사진 8" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/052.jpg" alt="사진 9" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/075.jpg" alt="사진 10" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/076.jpg" alt="사진 11" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/079.jpg" alt="사진 12" loading="lazy" /></button>
+        <button type="button" class="gallery-item contain"><img src="images/gallery/merged3.png" alt="사진 13" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/098.jpg" alt="사진 14" loading="lazy" /></button>
+        <button type="button" class="gallery-item contain"><img src="images/gallery/merged2.png" alt="사진 15" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/107.jpg" alt="사진 16" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/109.jpg" alt="사진 17" loading="lazy" /></button>
+        <button type="button" class="gallery-item"><img src="images/gallery/112.jpg" alt="사진 18" loading="lazy" /></button>
+      </div>
+    </section>
+
 <section class="section location">
       <div class="section-label">LOCATION</div>
       <h2 class="section-title">오시는 길</h2>
@@ -432,7 +504,7 @@ body {
         </div>
         <div class="transport-item">
           <h4>🚗 차량</h4>
-          <p>내비게이션에 '크레스트72' 검색<br/>국립극장 맞은편 반얀트리 옆<br/>정문 만차 시 후문 주차장 이용</p>
+          <p>내비게이션에 '크레스트72' 검색<br/>국립극장 맞은편 반얀트리 옆<br/>정문 만차 시 후문 주차장 이용<br/>2시간 무료주차 제공</p>
         </div>
       </div>
     </section>
@@ -443,17 +515,14 @@ body {
       <div class="contact-group">
         <button class="contact-toggle">신랑측 계좌번호 <span>+</span></button>
         <div class="contact-body">
-          <p>신랑 · 000-0000-0000 (은행명)</p>
-          <p>신랑 아버지 · 000-0000-0000 (은행명)</p>
-          <p>신랑 어머니 · 000-0000-0000 (은행명)</p>
+          <p>신랑 김민겸 · 케이뱅크 100-114-884603</p>
         </div>
       </div>
       <div class="contact-group">
         <button class="contact-toggle">신부측 계좌번호 <span>+</span></button>
         <div class="contact-body">
-          <p>신부 · 000-0000-0000 (은행명)</p>
-          <p>신부 아버지 · 000-0000-0000 (은행명)</p>
-          <p>신부 어머니 · 000-0000-0000 (은행명)</p>
+          <p>신부 박성연 · 케이뱅크 100-156-705619</p>
+          <p>신부 어머니 이찬순 · 우체국 012435-02-298931</p>
         </div>
       </div>
     </section>
@@ -463,6 +532,14 @@ body {
       <p class="footer-names">김민겸 &middot; 박성연</p>
     </footer>
 
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="닫기">&times;</button>
+    <button class="lb-prev" id="lbPrev" aria-label="이전 사진">&#8249;</button>
+    <img class="lb-img" id="lbImg" alt="" />
+    <button class="lb-next" id="lbNext" aria-label="다음 사진">&#8250;</button>
+    <div class="lb-counter" id="lbCounter"></div>
   </div>
 
 <!-- 카카오맵 SDK: 아래 YOUR_KAKAO_JS_KEY를 발급받은 JavaScript 키로 교체하세요.
@@ -589,6 +666,65 @@ document.querySelectorAll('.contact-toggle').forEach(btn => {
     body.classList.toggle('open');
   });
 });
+
+(function initLightbox() {
+  const items = document.querySelectorAll('.gallery-item');
+  const lb = document.getElementById('lightbox');
+  if (!lb || items.length === 0) return;
+
+  const lbImg = document.getElementById('lbImg');
+  const lbCounter = document.getElementById('lbCounter');
+  const srcs = Array.from(items).map(el => el.querySelector('img').src);
+  const alts = Array.from(items).map(el => el.querySelector('img').alt);
+  let idx = 0;
+
+  function show() {
+    lbImg.src = srcs[idx];
+    lbImg.alt = alts[idx];
+    lbCounter.textContent = (idx + 1) + ' / ' + srcs.length;
+  }
+  function open(i) {
+    idx = i;
+    show();
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function prev(e) { if (e) e.stopPropagation(); idx = (idx - 1 + srcs.length) % srcs.length; show(); }
+  function next(e) { if (e) e.stopPropagation(); idx = (idx + 1) % srcs.length; show(); }
+
+  items.forEach((el, i) => el.addEventListener('click', () => open(i)));
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  document.getElementById('lbNext').addEventListener('click', next);
+  lb.addEventListener('click', (e) => { if (e.target === lb || e.target === lbImg) close(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') prev();
+    else if (e.key === 'ArrowRight') next();
+  });
+
+  // Touch swipe
+  let touchStartX = 0, touchStartY = 0;
+  lb.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  lb.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx > 0) prev(); else next();
+    }
+  });
+})();
 
 (function renderCalendar() {
   const year = 2026;
