@@ -183,20 +183,14 @@ body {
   color: var(--text);
 }
 
-.countdown {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-  text-align: center;
+.date-countdown {
   font-family: var(--serif-en);
-  font-weight: 300;
-  color: var(--text);
+  font-size: 13px;
+  color: var(--accent);
+  margin-left: 10px;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.08em;
-  font-size: 22px;
+  letter-spacing: 0.06em;
 }
-.cd-dday { color: var(--accent); margin-right: 14px; }
-.cd-time { color: var(--sub); }
 .cal-head {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -484,13 +478,9 @@ body {
           <span class="divider">|</span>
           <span>28</span>
         </div>
-        <div class="date-time">오후 6시</div>
+        <div class="date-time">오후 6시 <span class="date-countdown" id="cdInline" aria-live="polite">D-–</span></div>
       </div>
       <div class="calendar" id="calendar"></div>
-      <div class="countdown" aria-live="polite">
-        <span class="cd-dday" id="cdDday">D-–</span>
-        <span class="cd-time" id="cdTime">–:–</span>
-      </div>
     </section>
 
     <section class="section gallery">
@@ -712,26 +702,21 @@ document.querySelectorAll('.contact-toggle').forEach(btn => {
 
 (function countdown() {
   const target = new Date('2026-11-28T18:00:00+09:00').getTime();
-  const dd = document.getElementById('cdDday');
-  const tm = document.getElementById('cdTime');
-  if (!dd || !tm) return;
+  const el = document.getElementById('cdInline');
+  if (!el) return;
   const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
   function tick() {
     const diff = target - Date.now();
-    if (diff <= 0) {
-      dd.textContent = 'D-DAY';
-      tm.textContent = '00:00';
-      return;
-    }
+    if (diff <= 0) { el.textContent = 'D-DAY'; return; }
     const s = Math.floor(diff / 1000);
     const days = Math.floor(s / 86400);
     const hrs = Math.floor((s % 86400) / 3600);
     const mins = Math.floor((s % 3600) / 60);
-    dd.textContent = 'D-' + days;
-    tm.textContent = pad(hrs) + ':' + pad(mins);
+    const secs = s % 60;
+    el.textContent = 'D-' + days + ' ' + pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
   }
   tick();
-  setInterval(tick, 30000);
+  setInterval(tick, 1000);
 })();
 
 (function initLightbox() {
