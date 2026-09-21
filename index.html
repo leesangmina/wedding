@@ -286,7 +286,23 @@ body {
   font-weight: 700;
   margin-bottom: 8px;
   letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
+.venue-call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.venue-call:hover { transform: scale(1.08); opacity: 0.92; }
 .venue-addr, .venue-detail {
   font-size: 14px;
   color: var(--sub);
@@ -512,7 +528,12 @@ body {
       <div class="section-label">LOCATION</div>
       <h2 class="section-title">오시는 길</h2>
       <div class="venue">
-        <p class="venue-name">크레스트72 글라스홀</p>
+        <p class="venue-name">
+          크레스트72 글라스홀
+          <a href="tel:02-2232-7366" class="venue-call" aria-label="크레스트72에 전화 (02-2232-7366)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.36 11.36 0 003.56.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.49a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.25 1.02l-2.19 2.2z"/></svg>
+          </a>
+        </p>
         <p class="venue-addr">서울시 중구 장충단로 72</p>
         <p class="venue-detail">크레스트72</p>
       </div>
