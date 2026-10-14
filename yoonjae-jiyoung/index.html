@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="윤재 ♥ 지영, 피로연에 모십니다">
+<meta property="og:description" content="2026년 10월 24일 토요일 오후 5시 · 고창 르네상스웨딩홀">
+<meta property="og:image" content="https://leesangmina.github.io/wedding/yoonjae-jiyoung/photos/photo04.jpg">
+<meta property="og:type" content="website">
+<title>윤재 & 지영 청첩장</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Gowun+Batang:wght@400;700&display=swap">
+<style>
+/* Layout: single mobile column (max 460px) of ivory panels; sage arch cards mark the two events, 피로연 dominant. */
+:root{
+  --bg:#f7f5ee;          /* warm ivory ground */
+  --panel:#fdfcf8;       /* paper panel */
+  --sage:#dde5d2;        /* sage card fill */
+  --sage-deep:#64745c;   /* deep sage for headings/accents */
+  --ink:#45503f;         /* body text, green-grey */
+  --muted:#8c937f;       /* captions */
+  --line:#e4e1d3;        /* hairlines */
+  --font-script:'Great Vibes',cursive;
+  --font-serif:'Cormorant Garamond',serif;
+  --font-kr:'Gowun Batang','Nanum Myeongjo',serif;
+  color-scheme:light;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-kr);margin:0;
+  -webkit-font-smoothing:antialiased;line-height:1.75;}
+.wrap{max-width:460px;margin:0 auto;padding:0 20px 64px;}
+section{margin:0 0 72px;}
+img{max-width:100%;display:block;}
+
+/* type */
+.script{font-family:var(--font-script);color:var(--sage-deep);font-weight:400;}
+.eyebrow{font-family:var(--font-serif);font-size:12px;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--muted);text-align:center;margin:0 0 10px;}
+h2{font-family:var(--font-script);font-size:34px;line-height:1.2;color:var(--sage-deep);
+  text-align:center;font-weight:400;margin:0 0 26px;text-wrap:balance;}
+p{margin:0;}
+
+/* hero */
+.hero{padding-top:40px;text-align:center;}
+.hero .script{font-size:52px;line-height:1.1;margin:0 0 6px;}
+.hero .names-en{font-family:var(--font-serif);font-size:15px;letter-spacing:.34em;color:var(--ink);
+  text-transform:uppercase;margin:0 0 28px;}
+.arch{border-radius:999px 999px 18px 18px;overflow:hidden;background:var(--sage);}
+.arch img{width:100%;height:100%;object-fit:cover;}
+.hero .arch{aspect-ratio:3/4;max-width:340px;margin:0 auto;}
+.hero .date-line{font-family:var(--font-serif);font-size:15px;letter-spacing:.22em;margin:26px 0 4px;}
+.hero .venue-line{font-size:14px;color:var(--muted);letter-spacing:.08em;}
+.flower{width:46px;margin:34px auto 0;opacity:.9;}
+
+/* greeting */
+.greeting{text-align:center;}
+.greeting .msg{font-size:15.5px;color:var(--ink);padding:0 6px;}
+.family{margin-top:34px;display:grid;gap:10px;justify-content:center;font-size:15px;}
+.family .row{display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap;}
+.family .parents{color:var(--muted);font-size:14px;letter-spacing:.04em;}
+.family .who{font-size:13px;color:var(--sage-deep);letter-spacing:.2em;}
+.family .name{font-weight:700;letter-spacing:.1em;}
+
+/* 피로연 — dominant sage arch card */
+.feast-card{background:var(--sage);border-radius:220px 220px 26px 26px;
+  padding:72px 26px 34px;text-align:center;}
+.feast-card .eyebrow{color:var(--sage-deep);}
+.feast-card h2{margin-bottom:8px;}
+.feast-kr-title{font-size:21px;font-weight:700;letter-spacing:.3em;color:var(--ink);
+  text-align:center;margin:0 0 30px;}
+.feast-date{font-family:var(--font-serif);font-size:26px;letter-spacing:.14em;margin:0 0 2px;}
+.feast-day{font-size:15px;letter-spacing:.14em;color:var(--sage-deep);margin:0 0 20px;}
+.feast-time{display:inline-block;background:var(--panel);border-radius:999px;
+  padding:9px 22px;font-size:16px;font-weight:700;letter-spacing:.1em;margin-bottom:26px;}
+.feast-venue{font-size:19px;font-weight:700;letter-spacing:.14em;margin:0 0 4px;}
+.feast-addr{font-size:14.5px;color:var(--ink);opacity:.85;margin:0 0 20px;}
+.feast-note{font-size:13.5px;color:var(--sage-deep);margin:22px 0 0;}
+.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn{font-family:var(--font-kr);font-size:13.5px;letter-spacing:.06em;color:var(--ink);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;
+  padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;}
+.btn:active{background:var(--bg);}
+
+/* calendar */
+.cal{background:var(--panel);border:1px solid var(--line);border-radius:20px;
+  padding:22px 18px 18px;max-width:320px;margin:30px auto 0;}
+.cal .cal-title{font-family:var(--font-serif);font-size:15px;letter-spacing:.3em;
+  text-align:center;color:var(--sage-deep);margin:0 0 14px;}
+.cal table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+.cal th{font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.1em;padding:4px 0 8px;}
+.cal td{text-align:center;font-size:14px;padding:6px 0;color:var(--ink);}
+.cal td.dim{color:transparent;}
+.cal td.sun{color:#b0796f;}
+.cal td .d{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;}
+.cal td.mark .d{background:var(--sage-deep);color:#fdfcf8;font-weight:700;}
+
+/* countdown */
+.count{background:var(--panel);border:1px solid var(--line);border-radius:20px;
+  padding:22px 18px 20px;max-width:320px;margin:14px auto 0;text-align:center;}
+.count .count-title{font-family:var(--font-serif);font-size:12px;letter-spacing:.34em;
+  color:var(--muted);margin:0 0 6px;}
+.count-d{font-family:var(--font-serif);font-size:30px;letter-spacing:.12em;
+  color:var(--sage-deep);margin:0 0 14px;}
+.count-grid{display:flex;justify-content:center;gap:8px;}
+.cu{background:var(--sage);border-radius:12px;flex:1;max-width:64px;padding:10px 4px 8px;}
+.cu b{display:block;font-family:var(--font-serif);font-weight:500;font-size:22px;
+  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.2;}
+.cu span{font-size:11px;color:var(--sage-deep);letter-spacing:.12em;}
+
+/* 결혼식 — small quiet block */
+.small-event{border:1px solid var(--line);border-radius:18px;background:var(--panel);
+  padding:24px 22px;text-align:center;}
+.small-event .label{font-size:12.5px;letter-spacing:.3em;color:var(--muted);margin:0 0 10px;}
+.small-event .line{font-size:15px;letter-spacing:.06em;}
+.small-event .line b{letter-spacing:.1em;}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.gal button{padding:0;border:0;background:none;cursor:pointer;border-radius:14px;overflow:hidden;}
+.gal img{aspect-ratio:3/4;object-fit:cover;width:100%;}
+.gal button:first-child{grid-column:1/-1;}
+.gal button:first-child img{aspect-ratio:4/3;}
+/* lightbox */
+.lb[hidden]{display:none!important;}
+.lb{position:fixed;inset:0;background:rgba(40,45,36,.92);display:grid;place-items:center;
+  z-index:50;padding:24px;}
+.lb img{max-height:86vh;max-width:100%;border-radius:12px;object-fit:contain;}
+.lb .x{position:absolute;top:18px;right:22px;font-family:var(--font-serif);font-size:30px;
+  color:#fdfcf8;background:none;border:0;cursor:pointer;line-height:1;
+  padding-top:env(safe-area-inset-top,0px);}
+
+/* accounts */
+.acc{border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;}
+.acc summary{list-style:none;cursor:pointer;padding:16px 20px;text-align:center;
+  font-size:15px;letter-spacing:.12em;color:var(--sage-deep);}
+.acc summary::-webkit-details-marker{display:none;}
+.acc summary::after{content:"▾";margin-left:8px;font-size:12px;color:var(--muted);}
+.acc[open] summary::after{content:"▴";}
+.acc .rows{border-top:1px solid var(--line);}
+.acc .row{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:15px 18px;flex-wrap:wrap;}
+.acc .row + .row{border-top:1px dashed var(--line);}
+.acc .info{min-width:0;}
+.acc .holder{font-size:14px;color:var(--muted);}
+.acc .num{font-size:15px;letter-spacing:.04em;font-variant-numeric:tabular-nums;}
+
+/* closing */
+.closing{text-align:center;}
+.closing .arch{aspect-ratio:3/4;max-width:300px;margin:0 auto 28px;}
+.closing .script{font-size:30px;margin:0 0 14px;}
+.closing .msg{font-size:14.5px;color:var(--muted);}
+.foot{margin-top:60px;text-align:center;font-family:var(--font-serif);
+  font-size:12px;letter-spacing:.26em;color:var(--muted);}
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);
+  background:#45503f;color:#fdfcf8;font-size:13.5px;letter-spacing:.06em;
+  padding:10px 22px;border-radius:999px;z-index:60;
+  margin-bottom:env(safe-area-inset-bottom,0px);}
+</style>
+
+<div class="wrap">
+
+  <!-- 표지 -->
+  <section class="hero">
+    <p class="script">Wedding Day</p>
+    <p class="names-en">Yoonjae &amp; Jiyoung</p>
+    <div class="arch"><img src="photos/photo04.jpg" alt="정윤재, 이지영 커플 사진"></div>
+    <p class="date-line">2026 . 10 . 24 SAT</p>
+    <p class="venue-line">피로연 · 고창 르네상스웨딩홀</p>
+    <svg class="flower" viewBox="0 0 60 60" aria-hidden="true">
+      <g fill="none" stroke="#64745c" stroke-width="1.3" stroke-linecap="round">
+        <path d="M30 56 C30 40 30 30 30 22"/>
+        <path d="M30 34 C22 30 18 24 18 18 C24 18 29 22 30 28 C31 22 36 18 42 18 C42 24 38 30 30 34 Z"/>
+        <circle cx="30" cy="14" r="6"/>
+        <path d="M30 42 C26 40 23 37 22 33"/>
+        <path d="M30 46 C34 44 37 41 38 37"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- 모시는 글 -->
+  <section class="greeting">
+    <p class="eyebrow">Invitation</p>
+    <h2>Dear family and friends</h2>
+    <p class="msg">
+      서로가 마주 보며 다져온 사랑을<br>
+      이제 함께 한곳을 바라보며 걸어가고자 합니다.<br><br>
+      저희 두 사람이 첫걸음을 내딛는 자리에<br>
+      오셔서 축복해 주시면<br>
+      더없는 기쁨으로 간직하겠습니다.
+    </p>
+    <div class="family">
+      <div class="row">
+        <span class="parents">정일규 · 최종화 의 아들</span>
+        <span class="who">신랑</span><span class="name">정윤재</span>
+      </div>
+      <div class="row">
+        <span class="parents">이석종 · 이진숙 의 딸</span>
+        <span class="who">신부</span><span class="name">이지영</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 피로연 (메인) -->
+  <section>
+    <div class="feast-card">
+      <p class="eyebrow">Celebration</p>
+      <h2>Time &amp; Venue</h2>
+      <p class="feast-kr-title">피로연에 모십니다</p>
+      <p class="feast-date">2026 . 10 . 24</p>
+      <p class="feast-day">토요일</p>
+      <p><span class="feast-time">오후 5시 – 8시</span></p>
+      <p class="feast-venue">르네상스웨딩홀</p>
+      <p class="feast-addr" id="feastAddr">전북 고창군 중앙로 151</p>
+      <div class="btn-row">
+        <button class="btn" id="copyAddr" type="button">주소 복사</button>
+        <a class="btn" href="https://map.kakao.com/link/search/%EA%B3%A0%EC%B0%BD%20%EB%A5%B4%EB%84%A4%EC%83%81%EC%8A%A4%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">카카오맵</a>
+        <a class="btn" href="https://map.naver.com/p/search/%EA%B3%A0%EC%B0%BD%20%EB%A5%B4%EB%84%A4%EC%83%81%EC%8A%A4%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">네이버지도</a>
+      </div>
+      <p class="feast-note">결혼식에 앞서, 가까운 분들을 모시고<br>감사의 자리를 마련하였습니다.</p>
+    </div>
+
+    <div class="cal">
+      <p class="cal-title">OCTOBER 2026</p>
+      <table>
+        <thead>
+          <tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim">0</td><td class="dim">0</td><td class="dim">0</td><td class="dim">0</td><td><span class="d">1</span></td><td><span class="d">2</span></td><td><span class="d">3</span></td></tr>
+          <tr><td class="sun"><span class="d">4</span></td><td><span class="d">5</span></td><td><span class="d">6</span></td><td><span class="d">7</span></td><td><span class="d">8</span></td><td><span class="d">9</span></td><td><span class="d">10</span></td></tr>
+          <tr><td class="sun"><span class="d">11</span></td><td><span class="d">12</span></td><td><span class="d">13</span></td><td><span class="d">14</span></td><td><span class="d">15</span></td><td><span class="d">16</span></td><td><span class="d">17</span></td></tr>
+          <tr><td class="sun"><span class="d">18</span></td><td><span class="d">19</span></td><td><span class="d">20</span></td><td><span class="d">21</span></td><td><span class="d">22</span></td><td><span class="d">23</span></td><td class="mark"><span class="d">24</span></td></tr>
+          <tr><td class="sun"><span class="d">25</span></td><td><span class="d">26</span></td><td><span class="d">27</span></td><td><span class="d">28</span></td><td><span class="d">29</span></td><td><span class="d">30</span></td><td><span class="d">31</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="count">
+      <p class="count-title">COUNTDOWN</p>
+      <p class="count-d" id="countD">D-DAY</p>
+      <div class="count-grid">
+        <div class="cu"><b id="cDay">0</b><span>일</span></div>
+        <div class="cu"><b id="cHour">00</b><span>시간</span></div>
+        <div class="cu"><b id="cMin">00</b><span>분</span></div>
+        <div class="cu"><b id="cSec">00</b><span>초</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 결혼식 (작게) -->
+  <section>
+    <div class="small-event">
+      <p class="label">WEDDING</p>
+      <p class="line"><b>2026년 11월 8일 일요일 오후 3시 20분</b></p>
+      <p class="line">아너스홀</p>
+    </div>
+  </section>
+
+  <!-- 갤러리 -->
+  <section>
+    <p class="eyebrow">Gallery</p>
+    <h2>Our moments</h2>
+    <div class="gal" id="gal">
+      <button type="button" data-src="photos/photo07.jpg"><img src="photos/photo07.jpg" alt="들판에 앉아 웃는 두 사람"></button>
+      <button type="button" data-src="photos/photo01.jpg"><img src="photos/photo01.jpg" alt="손을 잡고 걷는 모습"></button>
+      <button type="button" data-src="photos/photo02.jpg"><img src="photos/photo02.jpg" alt="잔디밭을 달리는 모습"></button>
+      <button type="button" data-src="photos/photo03.jpg"><img src="photos/photo03.jpg" alt="나무 아래에서 마주 본 모습"></button>
+      <button type="button" data-src="photos/photo05.jpg"><img src="photos/photo05.jpg" alt="언덕 위에서 하늘을 보는 모습"></button>
+      <button type="button" data-src="photos/photo06.jpg"><img src="photos/photo06.jpg" alt="서로를 바라보는 뒷모습"></button>
+      <button type="button" data-src="photos/photo08.jpg"><img src="photos/photo08.jpg" alt="나뭇잎 앞에서 손을 잡은 모습"></button>
+      <button type="button" data-src="photos/photo09.jpg"><img src="photos/photo09.jpg" alt="꽃을 들고 앉아 있는 모습"></button>
+      <button type="button" data-src="photos/photo10.jpg"><img src="photos/photo10.jpg" alt="하늘 아래 함께 앉은 모습"></button>
+      <button type="button" data-src="photos/photo04.jpg"><img src="photos/photo04.jpg" alt="나란히 선 두 사람"></button>
+    </div>
+  </section>
+
+  <!-- 마음 전하실 곳 -->
+  <section>
+    <p class="eyebrow">With gratitude</p>
+    <h2>Little wishes</h2>
+    <details class="acc">
+      <summary>신랑 측 마음 전하실 곳</summary>
+      <div class="rows">
+        <div class="row">
+          <div class="info">
+            <p class="holder">농협 · 정일규</p>
+            <p class="num">521046-52-040339</p>
+          </div>
+          <button class="btn" type="button" data-copy="52104652040339">복사</button>
+        </div>
+        <div class="row">
+          <div class="info">
+            <p class="holder">농협 · 최종화</p>
+            <p class="num">521046-52-049044</p>
+          </div>
+          <button class="btn" type="button" data-copy="52104652049044">복사</button>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 맺음 -->
+  <section class="closing">
+    <div class="arch"><img src="photos/photo06.jpg" alt="서로를 바라보는 두 사람"></div>
+    <p class="script">We can't wait to celebrate with you</p>
+    <p class="msg">귀한 걸음 하시어 축복해 주시는 모든 분들께<br>진심으로 감사드립니다.</p>
+    <p class="foot">YOONJAE &amp; JIYOUNG · 2026</p>
+  </section>
+
+</div>
+
+<div class="lb" id="lb" hidden>
+  <button class="x" id="lbClose" type="button" aria-label="닫기">×</button>
+  <img id="lbImg" src="photos/photo07.jpg" alt="사진 크게 보기">
+</div>
+
+<script>
+function toast(msg){
+  var t=document.createElement('div');t.className='toast';t.textContent=msg;
+  document.body.appendChild(t);setTimeout(function(){t.remove();},1800);
+}
+function copyText(text,label){
+  function fallback(){
+    var ta=document.createElement('textarea');ta.value=text;
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');toast(label+' 복사되었습니다');}
+    catch(e){toast('복사에 실패했습니다');}
+    ta.remove();
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){toast(label+' 복사되었습니다');},fallback);
+  }else{fallback();}
+}
+document.getElementById('copyAddr').addEventListener('click',function(){
+  copyText(document.getElementById('feastAddr').textContent.trim(),'주소가');
+});
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){copyText(b.getAttribute('data-copy'),'계좌번호가');});
+});
+var lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg');
+document.getElementById('gal').addEventListener('click',function(e){
+  var btn=e.target.closest('button[data-src]');if(!btn)return;
+  lbImg.src=btn.getAttribute('data-src');lb.hidden=false;
+});
+lb.addEventListener('click',function(){lb.hidden=true;});
+/* 피로연 카운트다운: 2026-10-24 17:00 KST */
+var countTarget=new Date('2026-10-24T17:00:00+09:00').getTime();
+var cD=document.getElementById('countD'),
+    cDay=document.getElementById('cDay'),cHour=document.getElementById('cHour'),
+    cMin=document.getElementById('cMin'),cSec=document.getElementById('cSec');
+function pad2(n){return n<10?'0'+n:''+n;}
+function countTick(){
+  var diff=countTarget-Date.now();
+  if(diff<=0){
+    cD.textContent='D-DAY';
+    cDay.textContent='0';cHour.textContent='00';cMin.textContent='00';cSec.textContent='00';
+    clearInterval(countTimer);return;
+  }
+  var d=Math.floor(diff/86400000),
+      h=Math.floor(diff%86400000/3600000),
+      m=Math.floor(diff%3600000/60000),
+      s=Math.floor(diff%60000/1000);
+  cD.textContent=d>0?'D-'+d:'D-DAY';
+  cDay.textContent=d;cHour.textContent=pad2(h);cMin.textContent=pad2(m);cSec.textContent=pad2(s);
+}
+var countTimer=setInterval(countTick,1000);
+countTick();
+</script>
+</html>
