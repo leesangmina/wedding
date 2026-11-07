@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>민겸 ♡ 성연 사진 보내기</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+button { background: none; border: none; cursor: pointer; font-family: inherit; }
+
+:root {
+  --bg: #faf7f2;
+  --text: #3a3530;
+  --sub: #8a847d;
+  --line: #e4ddd3;
+  --accent: #b89968;
+  --error: #b5533c;
+  --serif-en: 'Cormorant Garamond', serif;
+  --serif-kr: 'Nanum Myeongjo', serif;
+}
+
+body {
+  background: #eae5dd;
+  color: var(--text);
+  font-family: var(--serif-kr);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 72px 32px 56px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.06);
+}
+
+.label {
+  font-family: var(--serif-en);
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.title { font-size: 20px; font-weight: 400; letter-spacing: 0.1em; margin-bottom: 20px; }
+.desc { font-size: 14px; color: var(--sub); margin-bottom: 40px; }
+
+.guest {
+  width: 100%;
+  padding: 14px 4px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+.guest:focus { border-bottom-color: var(--accent); }
+
+.pick {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.pick input { display: none; }
+
+.notice { margin-top: 16px; font-size: 12px; color: var(--sub); }
+.total { margin-top: 32px; font-size: 14px; }
+
+.files { margin-top: 16px; list-style: none; text-align: left; }
+.file { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.file-head { display: flex; justify-content: space-between; gap: 12px; }
+.file-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.file-state { flex: none; color: var(--sub); }
+.file.done .file-state { color: var(--accent); }
+.file.failed .file-state { color: var(--error); }
+.bar { height: 2px; margin-top: 8px; background: var(--line); }
+.bar i { display: block; width: 0; height: 100%; background: var(--accent); transition: width 0.2s; }
+</style>
+</head>
+<body>
+<main class="page">
+  <p class="label">PHOTOS</p>
+  <h1 class="title">그날의 사진을 보내주세요</h1>
+  <p class="desc">담아주신 순간은<br>신랑 신부에게만 전달됩니다.</p>
+
+  <input class="guest" id="guest" type="text" maxlength="30" placeholder="이름 (선택)" autocomplete="name" />
+  <label class="pick">
+    사진 · 영상 선택
+    <input id="picker" type="file" accept="image/*,video/*" multiple />
+  </label>
+  <p class="notice">올리는 동안 이 화면을 닫지 말아주세요.</p>
+
+  <p class="total" id="total" hidden></p>
+  <ul class="files" id="files"></ul>
+</main>
+
+<script>
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyRdVfHO2EJ1Yz4S1zx_re3-L6o96H5JFbSeIUd8hNr3_lYgnBTlwgnf_OAXm9FtXrX/exec';
+const MAX_BYTES = 2 * 1024 * 1024 * 1024;
+const CHUNK_BYTES = 8 * 1024 * 1024; // 256KB의 배수여야 합니다
+const PARALLEL_FILES = 3;
+const MAX_RETRIES = 5;
+const MIME_BY_EXT = { heic: 'image/heic', heif: 'image/heif', mov: 'video/quicktime', mkv: 'video/x-matroska' };
+
+const uploaderId = Date.now().toString(36) + Math.random().toString(36).slice(2);
+const guestInput = document.getElementById('guest');
+const picker = document.getElementById('picker');
+const list = document.getElementById('files');
+const totalEl = document.getElementById('total');
+
+const queue = [];
+let active = 0;
+let finished = 0;
+let failed = 0;
+let added = 0;
+
+picker.addEventListener('change', () => {
+  for (const file of picker.files) enqueue(file);
+  picker.value = '';
+  pump();
+});
+
+window.addEventListener('beforeunload', e => {
+  if (active || queue.length) e.preventDefault();
+});
+
+function mimeOf(file) {
+  if (file.type) return file.type;
+  return MIME_BY_EXT[file.name.split('.').pop().toLowerCase()] || '';
+}
+
+function enqueue(file) {
+  const row = document.createElement('li');
+  row.className = 'file';
+  row.innerHTML = '<div class="file-head"><span class="file-name"></span><span class="file-state">대기 중</span></div><div class="bar"><i></i></div>';
+  row.querySelector('.file-name').textContent = file.name;
+  list.prepend(row);
+  added++;
+
+  const item = { file, row };
+  if (!/^(image|video)\//.test(mimeOf(file))) return fail(item, '사진·영상만 가능');
+  if (file.size === 0 || file.size > MAX_BYTES) return fail(item, '2GB 이하만 가능');
+  queue.push(item);
+  showTotal();
+}
+
+function pump() {
+  while (active < PARALLEL_FILES && queue.length) {
+    const item = queue.shift();
+    active++;
+    upload(item)
+      .then(() => {
+        finished++;
+        setState(item, 'done', '완료');
+      })
+      .catch(() => fail(item, '실패'))
+      .finally(() => {
+        active--;
+        showTotal();
+        pump();
+      });
+  }
+}
+
+async function upload(item) {
+  setState(item, '', '준비 중');
+  const uploadUrl = await withRetry(() => requestUploadUrl(item.file));
+  for (let start = 0; start < item.file.size; start += CHUNK_BYTES) {
+    const end = Math.min(start + CHUNK_BYTES, item.file.size);
+    await withRetry(() => sendChunk(uploadUrl, item.file, start, end));
+    const percent = Math.round(end / item.file.size * 100);
+    item.row.querySelector('.bar i').style.width = percent + '%';
+    setState(item, '', percent + '%');
+  }
+}
+
+async function requestUploadUrl(file) {
+  // text/plain으로 보내야 Apps Script가 처리하지 못하는 사전 요청(preflight)이 생기지 않습니다
+  const res = await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      name: file.name,
+      size: file.size,
+      mimeType: mimeOf(file),
+      guest: guestInput.value,
+      uploaderId,
+      origin: location.origin,
+    }),
+  });
+  const data = await res.json();
+  if (!data.uploadUrl) throw new Error(data.error || 'no upload url');
+  return data.uploadUrl;
+}
+
+async function sendChunk(uploadUrl, file, start, end) {
+  const res = await fetch(uploadUrl, {
+    method: 'PUT',
+    headers: { 'Content-Range': `bytes ${start}-${end - 1}/${file.size}` },
+    body: file.slice(start, end),
+  });
+  if (res.status !== 308 && !res.ok) throw new Error('chunk ' + res.status);
+}
+
+async function withRetry(task) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await task();
+    } catch (err) {
+      if (attempt >= MAX_RETRIES) throw err;
+      await new Promise(resolve => setTimeout(resolve, 1000 * 2 ** attempt));
+    }
+  }
+}
+
+function setState(item, className, text) {
+  item.row.className = 'file ' + className;
+  item.row.querySelector('.file-state').textContent = text;
+}
+
+function fail(item, text) {
+  failed++;
+  setState(item, 'failed', text);
+  showTotal();
+}
+
+function showTotal() {
+  totalEl.hidden = false;
+  totalEl.textContent = `${added}개 중 ${finished}개 완료` + (failed ? ` · ${failed}개 실패` : '');
+}
+</script>
+</body>
+</html>
